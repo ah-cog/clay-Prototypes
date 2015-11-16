@@ -5,11 +5,6 @@
  */
  
 // Spring drawing constants for top bar
-//int springHeight = 10;  // Height
-//int left;               // Left position
-//int right;              // Right position
-//int max = 200;          // Maximum Y value
-//int min = 100;          // Minimum Y value
 boolean touched = false;   // If mouse over
 boolean move = false;   // If mouse down and over
 
@@ -22,50 +17,32 @@ float D = 0.82;  // Damping
 float xDestination = 150;   // Rest position (in X dimension)
 float yDestination = 150;   // Rest position (in Y dimension)
 
-// Spring simulation variables
-float yPosition = yDestination;    // Position
-float yVelocity = 0.0;  // Velocity
-float yAcceleration = 0;    // Acceleration
-float yForce = 0;     // Force
-// Additional spring simulation variables
+// Spring simulation variables (x dimension)
 float xPosition = xDestination;    // Position
 float xVelocity = 0.0;  // Velocity
 float xAcceleration = 0;    // Acceleration
 float xForce = 0;     // Force
+
+// Spring simulation variables (y dimension)
+float yPosition = yDestination;    // Position
+float yVelocity = 0.0;  // Velocity
+float yAcceleration = 0;    // Acceleration
+float yForce = 0;     // Force
 
 void setup() {
   //size(640, 360);
   fullScreen();
   rectMode(CORNERS);
   noStroke();
-  //left = width/2 - 100;
-  //right = width/2 + 100;
 }
 
 void draw() {
   background(255);
   updatePosition();
-  //drawSpring();
   drawCircle();
-  //RX = mouseX; // Update rest position (in X dimension)
-  //RY = mouseY; // Update rest position (in Y dimension)
+  xDestination = mouseX; // Update rest position (in X dimension)
+  yDestination = mouseY; // Update rest position (in Y dimension)
 }
-
-//void drawSpring() {
-  
-//  // Draw base
-//  fill(0.2);
-//  float baseWidth = 0.5 * ps + -8;
-//  rect (width/2 - baseWidth, ps + springHeight, width/2 + baseWidth, height);
-
-//  // Set color and draw top bar
-//  if(over || move) { 
-//    fill(155);
-//  } else { 
-//    fill(204);
-//  }
-//  rect(left, ps, right, ps + springHeight);
-//}
 
 void drawCircle() {
   
@@ -83,8 +60,7 @@ void drawCircle() {
   
 }
 
-
-void updatePosition() {
+void updatePosition () {
   
   // Update the spring position
   double distance = Math.sqrt (Math.pow (xDestination - xPosition, 2) + Math.pow(xDestination - xPosition, 2)); // Determine distance to the calculated resting point
